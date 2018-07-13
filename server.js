@@ -13,10 +13,10 @@ const mysql = require('mysql');
 let status = true;
 // 创建mysql数据库连接
 const pool  = mysql.createPool({
-	host: "119.29.249.33",
-	user: "aming",
-	password: "5101259927x",
-	database: "aming_site_db"
+	host: "127.0.0.1",
+	user: "root",
+	password: "123456",
+	database: "site_db"
 });
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -84,60 +84,63 @@ app.use((req, res, next) => {
 		if (ip.substr(0, 7) === "::ffff:") {
 			ip = ip.substr(7)
 		}
-		pool.getConnection(function (err, connection) {
-			const sql = `INSERT INTO site_visit_info (platform, browser, isiPad, isiPhone,isAndroid, isMobile, isIE,
-		isFirefox,
-		isEdge,
-		isChrome,
-		isSafari,
-		isWindows,
-		isLinux,
-		isMac,
-		isUC,
-		version,
-		timestamp
-		) VALUES (
-				'${req.useragent.platform}',
-				'${req.useragent.browser}',
-				'${req.useragent.isiPad}',
-				'${req.useragent.isiPhone}',
-				'${req.useragent.isAndroid}',
-				'${req.useragent.isMobile}',
-				'${req.useragent.isIE}',
-				'${req.useragent.isFirefox}',
-				'${req.useragent.isEdge}',
-				'${req.useragent.isChrome}',
-				'${req.useragent.isSafari}',
-				'${req.useragent.isWindows}',
-				'${req.useragent.isLinux}',
-				'${req.useragent.isMac}',
-				'${req.useragent.isUC}',
-				'${req.useragent.version}',
-				'${Math.round(new Date().getTime() / 1000)}'
-				)`;
-			connection.query(sql, function (err, result, fields) {
-				connection.release();
-				if (err) throw err;
-			});
-		});
+		// 获取浏览器信息,没有数据库要报错所以注释掉了
+		// pool.getConnection(function (err, connection) {
+		// 	const sql = `INSERT INTO site_visit_info (platform, browser, isiPad, isiPhone,isAndroid, isMobile, isIE,
+		// isFirefox,
+		// isEdge,
+		// isChrome,
+		// isSafari,
+		// isWindows,
+		// isLinux,
+		// isMac,
+		// isUC,
+		// version,
+		// timestamp
+		// ) VALUES (
+		// 		'${req.useragent.platform}',
+		// 		'${req.useragent.browser}',
+		// 		'${req.useragent.isiPad}',
+		// 		'${req.useragent.isiPhone}',
+		// 		'${req.useragent.isAndroid}',
+		// 		'${req.useragent.isMobile}',
+		// 		'${req.useragent.isIE}',
+		// 		'${req.useragent.isFirefox}',
+		// 		'${req.useragent.isEdge}',
+		// 		'${req.useragent.isChrome}',
+		// 		'${req.useragent.isSafari}',
+		// 		'${req.useragent.isWindows}',
+		// 		'${req.useragent.isLinux}',
+		// 		'${req.useragent.isMac}',
+		// 		'${req.useragent.isUC}',
+		// 		'${req.useragent.version}',
+		// 		'${Math.round(new Date().getTime() / 1000)}'
+		// 		)`;
+		// 	connection.query(sql, function (err, result, fields) {
+		// 		connection.release();
+		// 		if (err) throw err;
+		// 	});
+		// });
 		axios.post(`http://ip.taobao.com/service/getIpInfo.php?ip=${ip}`)
 		.then(({data}) => {
-			pool.getConnection(function (err, connection) {
-				if (err) throw err;
-				const sql = `INSERT INTO site_ip_address (country, country_id, region, city, county, ip, timestamp) VALUES (
-				'${data.data.country}',
-				'${data.data.country_id}',
-				'${data.data.region}',
-				'${data.data.city}',
-				'${data.data.county}',
-				'${data.data.ip}',
-				'${Math.round(new Date().getTime() / 1000)}'
-				)`;
-				connection.query(sql, function (err, result) {
-					connection.release();
-					if (err) throw err;
-				});
-			});
+		  console.log(data);
+		  // 获取城市,ip
+			// pool.getConnection(function (err, connection) {
+			// 	if (err) throw err;
+			// 	const sql = `INSERT INTO site_ip_address (country, country_id, region, city, county, ip, timestamp) VALUES (
+			// 	'${data.data.country}',
+			// 	'${data.data.country_id}',
+			// 	'${data.data.region}',
+			// 	'${data.data.city}',
+			// 	'${data.data.county}',
+			// 	'${data.data.ip}',
+			// 	'${Math.round(new Date().getTime() / 1000)}'
+			// 	)`;
+			// 	connection.query(sql, function (err, result) {
+			// 		connection.release();
+			// 		if (err) throw err;
+			// 	});
+			// });
 		})
 		.catch((err) => {
 			console.log(err.response.data);
