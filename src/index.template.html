@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <title>{{ title }}</title>
+    <meta charset="utf-8">
+    <meta name="keywords" content="个人博客,阿明的个人博客,个人博客模板,阿明,免费教程，源码分享" />
+    <meta name="description" content="阿明的个人博客,是一个会写代码的美工,网站提供免费的教学资源以及网站源码分享，欢迎各位小伙伴来网站留言互动。" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="apple-touch-icon" sizes="120x120" href="/public/logo-120.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <link rel="shortcut icon" sizes="48x48" href="/public/logo-48.ico">
+    <meta name="theme-color" content="#f60">
+    <link rel="manifest" href="/manifest.json">
+    <style>
+      #skip a {  position:absolute;  left:-10000px;  top:auto;  width:1px;  height:1px;  overflow:hidden;  }
+      #skip a:focus {  position:static;  width:auto;  height:auto;  }
+    </style>
+    <script>
+			var _hmt = _hmt || [];
+			(function() {
+				var hm = document.createElement("script");
+				hm.src = "https://hm.baidu.com/hm.js?b6693eacab15fc17ab94ccbfecadfa2e";
+				var s = document.getElementsByTagName("script")[0];
+				s.parentNode.insertBefore(hm, s);
+			})();
+    </script>
+    <script src="https://qzonestyle.gtimg.cn/qzone/openapi/qc-1.0.1.js"></script>
+    <script>
+        window.QC = QC;
+    </script>
+  </head>
+  <body>
+  <div id="skip"><a href="#app">skip to content</a></div>
+  <script>/*! matchMedia() polyfill - Test a CSS media type/query in JS. Authors & copyright (c) 2012: Scott Jehl, Paul Irish, Nicholas Zakas, David Knight. Dual MIT/BSD license */
+	window.matchMedia||(window.matchMedia=function(){var styleMedia=(window.styleMedia||window.media);if(!styleMedia){var style=document.createElement("style"),script=document.getElementsByTagName("script")[0],info=null;style.type="text/css";style.id="matchmediajs-test";if(!script){document.head.appendChild(style)}else{script.parentNode.insertBefore(style,script)}info=("getComputedStyle" in window)&&window.getComputedStyle(style,null)||style.currentStyle;styleMedia={matchMedium:function(media){var text="@media "+media+"{ #matchmediajs-test { width: 1px; } }";if(style.styleSheet){style.styleSheet.cssText=text}else{style.textContent=text}return info.width==="1px"}}}return function(media){return{matches:styleMedia.matchMedium(media||"all"),media:media||"all"}}}());
+  </script>
+  <!--vue-ssr-outlet-->
+  </body>
+</html>
